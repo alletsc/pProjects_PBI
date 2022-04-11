@@ -1,0 +1,100 @@
+/* Análise exploratoria dos dados */
+
+select * from caso16."TB_FUNC";
+select count(*) from caso16."TB_FUNC";
+select * from caso16."TB_FUNC" limit 5;
+
+select * from caso16."TB_FUNC" order by salario_hora desc;
+
+select * from caso16."TB_FUNC" fetch first 3 rows only;
+
+/* visualizar valores distintos*/
+select distinct * from caso16."TB_FUNC";
+
+select distinct numero_filhos from caso16."TB_FUNC";
+
+select * from caso16."TB_FUNC" where idade = 30;
+
+/* operadores de comparação */
+
+select count(*) from caso16."TB_FUNC";
+
+select count(*) from caso16."TB_FUNC" where idade != 40;
+select count(*) from caso16."TB_FUNC" where idade >= 40;
+select count(*) from caso16."TB_FUNC" where idade <= 40;
+
+/* Operadore lógicos*/
+select count(*) from caso16."TB_FUNC" where idade > 30 and estado_civil = 'casado';
+
+select * from caso16."TB_FUNC" where idade > 40 and estado_civil = 'casado';
+
+select count(*) from caso16."TB_FUNC" where estado_civil = 'viuvo' or estado_civil = 'viúvo';
+
+select * from caso16."TB_FUNC" where idade > 20 and estado_civil = 'viúvo' or numero_filhos = 'NA';
+
+select * from caso16."TB_FUNC" where idade between 30 and 35;
+
+select * from caso16."TB_FUNC" where grau_instrucao like '%medio%';
+
+select * from caso16."TB_FUNC" where idade in (20,30);
+
+select * from caso16."TB_FUNC" where numero_filhos is null;
+
+/* Update data */
+
+
+update caso16."TB_FUNC" 
+	SET numero_filhos = null
+	where numero_filhos = 'NA';
+	
+commit; /* para salvar no bd */
+ 
+select * from caso16."TB_FUNC" where numero_filhos is null;
+
+delete from caso16."TB_FUNC" 
+	where numero_filhos = 'NA';
+
+commit;
+
+
+INSERT INTO caso16."TB_FUNC"(
+	id_func, estado_civil, grau_instrucao, numero_filhos, salario_hora, idade, reg_procedencia)
+	VALUES (39, 'viuvo', 'ensino superior', 3, 9.6, 35, 'sudeste');
+
+select min(salario_hora) from caso16."TB_FUNC";
+
+select max(salario_hora), min(salario_hora), avg(salario_hora), count(*), sum(salario_hora) from caso16."TB_FUNC";
+
+/* GROUP BY*/
+
+select round(avg(salario_hora)), reg_procedencia
+	from caso16."TB_FUNC"
+	group by reg_procedencia;
+	
+/* retornar a media de idade, num de filhos e grau de instrucao daqueles cujo salario estiver acima da media de todos os funcionarios.
+Apenas funcionarios da capital, casados e em ordem descrescente*/
+
+
+
+select round(avg(idade)), numero_filhos,  grau_instrucao, salario_hora
+	from caso16."TB_FUNC"
+	where reg_procedencia = 'capital' 
+		and estado_civil = 'casado'
+		and salario_hora > (select avg(salario_hora) from caso16."TB_FUNC")	
+group by numero_filhos, grau_instrucao, salario_hora
+order by round(avg(idade)) desc
+
+
+/* Retorne todos os registros dos funcionario com 2 filhos*/
+
+select * 
+from caso16."TB_FUNC" 
+where numero_filhos = '2'
+
+/* converter */
+select * 
+from caso16."TB_FUNC" 
+where cast(numero_filhos as integer) = 2
+
+
+

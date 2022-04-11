@@ -1,0 +1,11 @@
+---
+title: "inadimplencia"
+author: "stella costa"
+date: '2022-04-06'
+output: html_document
+---
+
+```{r}
+x <- rnorm(30)
+
+```

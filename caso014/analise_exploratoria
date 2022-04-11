@@ -1,0 +1,39 @@
+/* visualizar registros */
+
+select * from caso16."TB_FUNC";
+
+select * from caso16."TB_FUNC" limit 5;
+
+select * from caso16."TB_FUNC" fetch first 3 rows only;
+
+/* visualizar valores distintos*/
+select distinct * from caso16."TB_FUNC";
+
+select distinct numero_filhos from caso16."TB_FUNC";
+
+select * from caso16."TB_FUNC" where idade = 30;
+
+/* operadores de comparação */
+
+select count(*) from caso16."TB_FUNC";
+
+select count(*) from caso16."TB_FUNC" where idade != 40;
+select count(*) from caso16."TB_FUNC" where idade >= 40;
+select count(*) from caso16."TB_FUNC" where idade <= 40;
+
+/* Operadore lógicos*/
+select count(*) from caso16."TB_FUNC" where idade > 30 and estado_civil = 'casado';
+
+select * from caso16."TB_FUNC" where idade > 40 and estado_civil = 'casado';
+
+select count(*) from caso16."TB_FUNC" where estado_civil = 'viuvo' or estado_civil = 'viúvo';
+
+select * from caso16."TB_FUNC" where idade > 20 and estado_civil = 'viúvo' or numero_filhos = 'NA';
+
+select * from caso16."TB_FUNC" where idade between 30 and 35;
+
+select * from caso16."TB_FUNC" where grau_instrucao like '%medio%';
+
+select * from caso16."TB_FUNC" where idade in (20,30);
+
+select * from caso16."TB_FUNC" where numero_filhos is null;
